@@ -20,7 +20,7 @@ type CustomClaims struct {
 	jwt.MapClaims
 }
 
-func (c *CustomClaims) GetUserID() (string, error) { return c.parseString("user_id") }
+func (c *CustomClaims) GetUserID() (uint, error) { return c.parseUInt("user_id") }
 
 func (c *CustomClaims) GetUsername() (string, error) { return c.parseString("username") }
 
@@ -33,7 +33,7 @@ func (c *CustomClaims) GetPermissions() (jwt.ClaimStrings, error) {
 }
 
 func (c *CustomClaims) GetVersion() (uint, error) {
-	return c.parseInt("version")
+	return c.parseUInt("version")
 }
 
 func (c *CustomClaims) IsValidVersion(currentVersion uint) (bool, error) {
@@ -66,7 +66,7 @@ func (c *CustomClaims) parseString(key string) (string, error) {
 	return iss, nil
 }
 
-func (c *CustomClaims) parseInt(key string) (uint, error) {
+func (c *CustomClaims) parseUInt(key string) (uint, error) {
 	var (
 		ok  bool
 		raw interface{}
