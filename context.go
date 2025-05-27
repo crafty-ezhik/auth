@@ -6,10 +6,10 @@ type HTTPContext interface {
 	GetHeader(name string) string
 
 	// Unauthorized - отправка ответа клиенту, что он не авторизирован
-	Unauthorized()
+	Unauthorized(msg string)
 
 	// SetUser - передача значения userID, username, ... в контекст для дальнейшего взаимодействия
-	SetUser(user any)
+	SetValueIntoContext(key string, value any)
 
 	// Next - передача управления следующему хендлеру
 	Next()
